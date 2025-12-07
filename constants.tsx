@@ -50,7 +50,7 @@ export const APP_CONFIG = {
 export const DEFAULT_SETTINGS: AppSettings = {
   bgType: 'image',
   bgColor: '#3b82f6',
-  bgImage: '/img/background1.jpg', // 默认使用img文件夹中的第一张背景图片
+  bgImage: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&w=2940&q=80', // 默认使用unsplash上的图片
   blurLevel: 12,
   overlayOpacity: 20,
   textColor: 'white',
