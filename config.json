@@ -1,0 +1,11 @@
+{
+  "comment": "这是项目的配置文件，用于存储默认设置和目标事件信息",
+  "defaultSettings": {
+    "bgType": "image",
+    "bgColor": "#3b82f6",
+    "bgImage": "/img/background1.jpg",
+    "blurLevel": 12,
+    "overlayOpacity": 20,
+    "textColor": "white"
+  }
+}
