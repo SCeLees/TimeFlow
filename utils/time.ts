@@ -31,6 +31,24 @@ export const formatNumber = (num: number): string => {
   return num < 10 ? `0${num}` : `${num}`;
 };
 
+// Helper function to format time display based on duration with one decimal place
+export const formatTimeDisplay = (milliseconds: number): string => {
+  const seconds = milliseconds / 1000;
+  const minutes = seconds / 60;
+  const hours = minutes / 60;
+  const days = hours / 24;
+
+  if (days >= 1) {
+    return `${days.toFixed(1)} 天`;
+  } else if (hours >= 1) {
+    return `${hours.toFixed(1)} 小时`;
+  } else if (minutes >= 1) {
+    return `${minutes.toFixed(1)} 分钟`;
+  } else {
+    return `${seconds.toFixed(1)} 秒`;
+  }
+};
+
 // 新增的时间段统计接口
 export interface PeriodStats {
   name: string;
@@ -98,28 +116,18 @@ export const calculatePeriodStats = (): PeriodStats[] => {
   const percentMonth = (msElapsedMonth / msInMonth) * 100;
   const percentYear = (msElapsedYear / msInYear) * 100;
   
-  // 转换为小时数用于显示
-  const hoursElapsedToday = msElapsedToday / (1000 * 60 * 60);
-  const hoursRemainingToday = msRemainingToday / (1000 * 60 * 60);
-  const hoursElapsedWeek = msElapsedWeek / (1000 * 60 * 60);
-  const hoursRemainingWeek = msRemainingWeek / (1000 * 60 * 60);
-  const hoursElapsedMonth = msElapsedMonth / (1000 * 60 * 60);
-  const hoursRemainingMonth = msRemainingMonth / (1000 * 60 * 60);
-  const hoursElapsedYear = msElapsedYear / (1000 * 60 * 60);
-  const hoursRemainingYear = msRemainingYear / (1000 * 60 * 60);
-  
   return [
     {
       name: '今日',
       elapsed: {
-        value: hoursElapsedToday,
+        value: msElapsedToday / (1000 * 60 * 60),
         unit: '小时',
-        display: `${Math.floor(hoursElapsedToday)} 小时`
+        display: formatTimeDisplay(msElapsedToday)
       },
       remaining: {
-        value: hoursRemainingToday,
+        value: msRemainingToday / (1000 * 60 * 60),
         unit: '小时',
-        display: `${Math.ceil(hoursRemainingToday)} 小时`
+        display: formatTimeDisplay(msRemainingToday)
       },
       percentage: percentToday,
       total: 24
@@ -127,14 +135,14 @@ export const calculatePeriodStats = (): PeriodStats[] => {
     {
       name: '本周',
       elapsed: {
-        value: hoursElapsedWeek,
+        value: msElapsedWeek / (1000 * 60 * 60),
         unit: '小时',
-        display: `${Math.floor(hoursElapsedWeek)} 小时`
+        display: formatTimeDisplay(msElapsedWeek)
       },
       remaining: {
-        value: hoursRemainingWeek,
+        value: msRemainingWeek / (1000 * 60 * 60),
         unit: '小时',
-        display: `${Math.ceil(hoursRemainingWeek)} 小时`
+        display: formatTimeDisplay(msRemainingWeek)
       },
       percentage: percentWeek,
       total: 168 // 7天 * 24小时
@@ -142,14 +150,14 @@ export const calculatePeriodStats = (): PeriodStats[] => {
     {
       name: '本月',
       elapsed: {
-        value: hoursElapsedMonth,
+        value: msElapsedMonth / (1000 * 60 * 60),
         unit: '小时',
-        display: `${Math.floor(hoursElapsedMonth / 24)} 天`
+        display: formatTimeDisplay(msElapsedMonth)
       },
       remaining: {
-        value: hoursRemainingMonth,
+        value: msRemainingMonth / (1000 * 60 * 60),
         unit: '小时',
-        display: `${Math.ceil(hoursRemainingMonth / 24)} 天`
+        display: formatTimeDisplay(msRemainingMonth)
       },
       percentage: percentMonth,
       total: msInMonth / (1000 * 60 * 60) // 总小时数
@@ -157,14 +165,14 @@ export const calculatePeriodStats = (): PeriodStats[] => {
     {
       name: '本年',
       elapsed: {
-        value: hoursElapsedYear,
+        value: msElapsedYear / (1000 * 60 * 60),
         unit: '小时',
-        display: `${Math.floor(hoursElapsedYear / 24)} 天`
+        display: formatTimeDisplay(msElapsedYear)
       },
       remaining: {
-        value: hoursRemainingYear,
+        value: msRemainingYear / (1000 * 60 * 60),
         unit: '小时',
-        display: `${Math.ceil(hoursRemainingYear / 24)} 天`
+        display: formatTimeDisplay(msRemainingYear)
       },
       percentage: percentYear,
       total: msInYear / (1000 * 60 * 60) // 总小时数

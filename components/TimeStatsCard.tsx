@@ -42,7 +42,7 @@ const TimeStatsCard: React.FC<TimeStatsCardProps> = ({ settings }) => {
 
   return (
     <div 
-      className="rounded-2xl border p-6 md:p-8 w-full max-w-2xl mx-auto transition-all duration-300 shadow-2xl"
+      className="rounded-2xl border p-6 md:p-8 w-full transition-all duration-300 shadow-2xl h-full"
       style={cardStyle}
     >
       <div className="flex items-center gap-3 mb-6 opacity-90">

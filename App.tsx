@@ -31,12 +31,22 @@ const App: React.FC = () => {
     localStorage.setItem('countdownFocusSettings', JSON.stringify(updatedSettings));
   };
 
+  // 判断是否为移动端
+  const isMobile = window.innerWidth < 768;
+
+  // 确定使用的背景图片
+  const backgroundImagePath = APP_CONFIG.enableDifferentBackgrounds && isMobile 
+    ? APP_CONFIG.mobileBgImage 
+    : settings.bgImage;
+
   const containerStyle: React.CSSProperties = {
     backgroundColor: settings.bgType === 'color' ? settings.bgColor : 'transparent',
-    backgroundImage: settings.bgType === 'image' && settings.bgImage ? `url(${settings.bgImage})` : 'none',
+    backgroundImage: settings.bgType === 'image' && backgroundImagePath ? `url(${backgroundImagePath})` : 'none',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'fixed',
+    minHeight: '100vh',
     color: settings.textColor
   };
 
@@ -46,58 +56,65 @@ const App: React.FC = () => {
       style={containerStyle}
     >
       {/* Overlay for better readability on images if needed, though cards handle this mostly */}
-      <div className={`absolute inset-0 transition-colors duration-500 pointer-events-none ${settings.bgType === 'image' ? 'bg-black/10' : ''}`} />
+      <div className={`fixed inset-0 transition-colors duration-500 pointer-events-none ${settings.bgType === 'image' ? 'bg-black/10' : ''}`} />
 
       {/* Content */}
-        <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
           
-          {/* Header */}
-          <header className="w-full max-w-5xl mx-auto flex justify-between items-center mb-8 md:mb-12">
-            <div className="flex items-center gap-2">
-               <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse"></div>
-               <h1 
-                 className="text-2xl md:text-4xl font-black tracking-tighter"
-                 style={{ textShadow: '0 2px 20px rgba(0,0,0,0.2)' }}
-               >
-                 倒计时
-               </h1>
+        {/* Header */}
+        <header className="w-full max-w-7xl mx-auto flex justify-between items-center mb-8 md:mb-12">
+          <div className="flex items-center gap-2">
+             <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse"></div>
+             <h1 
+               className="text-2xl md:text-4xl font-black tracking-tighter"
+               style={{ textShadow: '0 2px 20px rgba(0,0,0,0.2)' }}
+             >
+               倒计时
+             </h1>
+          </div>
+          
+          <button 
+            onClick={() => setIsSettingsOpen(true)}
+            className={`p-3 rounded-full backdrop-blur-md transition-all hover:scale-110 shadow-lg border ${
+              settings.textColor === 'white' 
+                ? 'bg-white/10 hover:bg-white/20 border-white/20 text-white' 
+                : 'bg-black/5 hover:bg-black/10 border-black/10 text-black'
+            }`}
+          >
+            <SettingsIcon className="w-6 h-6" />
+          </button>
+        </header>
+
+        {/* Main content area with responsive layout */}
+        <main className="w-full max-w-7xl mx-auto flex-grow">
+          <div className="w-full flex flex-col lg:flex-row gap-8">
+            {/* Left side - Countdown Cards */}
+            <div className="flex-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {APP_CONFIG.seasonCardPosition === 'first' && (
+                  <SeasonCountdownCard settings={settings} />
+                )}
+                {TARGET_EVENTS.map(event => (
+                  <CountdownCard 
+                    key={event.id} 
+                    event={event} 
+                    settings={settings} 
+                  />
+                ))}
+                {APP_CONFIG.seasonCardPosition === 'last' && (
+                  <SeasonCountdownCard settings={settings} />
+                )}
+              </div>
             </div>
             
-            <button 
-              onClick={() => setIsSettingsOpen(true)}
-              className={`p-3 rounded-full backdrop-blur-md transition-all hover:scale-110 shadow-lg border ${
-                settings.textColor === 'white' 
-                  ? 'bg-white/10 hover:bg-white/20 border-white/20 text-white' 
-                  : 'bg-black/5 hover:bg-black/10 border-black/10 text-black'
-              }`}
-            >
-              <SettingsIcon className="w-6 h-6" />
-            </button>
-          </header>
-
-          {/* Countdowns Grid */}
-          <main className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-10">
-            {APP_CONFIG.seasonCardPosition === 'first' && (
-              <SeasonCountdownCard settings={settings} />
-            )}
-            {TARGET_EVENTS.map(event => (
-              <CountdownCard 
-                key={event.id} 
-                event={event} 
-                settings={settings} 
-              />
-            ))}
-            {APP_CONFIG.seasonCardPosition === 'last' && (
-              <SeasonCountdownCard settings={settings} />
-            )}
-          </main>
-
-          {/* Time Stats Card */}
-          <div className="w-full max-w-5xl mx-auto mt-10">
-            <TimeStatsCard settings={settings} />
+            {/* Right side - Time Stats Card */}
+            <div className="w-full lg:w-96">
+              <TimeStatsCard settings={settings} />
+            </div>
           </div>
+        </main>
         
-        <footer className={`mt-auto text-sm font-medium opacity-60 py-6 text-center w-full`}>
+        <footer className={`mt-auto pt-8 pb-6 text-center w-full text-sm font-medium opacity-60`}>
           <div>把握当下，展望未来</div>
           <div className="mt-1">
             MIT License | Copyright © {new Date().getFullYear()}{' '}

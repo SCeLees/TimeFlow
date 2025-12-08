@@ -82,24 +82,24 @@ const SeasonCountdownCard: React.FC<SeasonCountdownCardProps> = ({ settings }) =
 
   return (
     <div 
-      className="rounded-2xl border p-6 md:p-8 w-full max-w-md mx-auto transition-all duration-300 hover:scale-[1.02] shadow-2xl"
+      className="rounded-2xl border p-4 md:p-6 w-full transition-all duration-300 hover:scale-[1.02] shadow-2xl h-full"
       style={cardStyle}
     >
-      <div className="flex items-center gap-3 mb-6 opacity-90">
-        <span className="p-2 rounded-lg bg-white/10 backdrop-blur-sm">
+      <div className="flex items-center gap-2 mb-4 opacity-90">
+        <span className="p-1.5 rounded-lg bg-white/10 backdrop-blur-sm">
           {seasonInfo.icon}
         </span>
-        <h2 className="text-2xl font-bold tracking-wide">{seasonInfo.name}倒计时</h2>
+        <h2 className="text-xl font-bold tracking-wide">{seasonInfo.name}倒计时</h2>
       </div>
 
-      <div className="grid grid-cols-4 gap-2 text-center">
+      <div className="grid grid-cols-4 gap-1 text-center">
         <TimeUnit value={timeLeft.days} label="天" settings={settings} />
         <TimeUnit value={timeLeft.hours} label="时" settings={settings} />
         <TimeUnit value={timeLeft.minutes} label="分" settings={settings} />
         <TimeUnit value={timeLeft.seconds} label="秒" settings={settings} />
       </div>
       
-      <div className="mt-6 text-center text-sm opacity-60 font-medium">
+      <div className="mt-4 text-center text-sm opacity-60 font-medium">
         目标日期: {new Date().getFullYear() + (new Date().getMonth() + 1 > seasonInfo.month || (new Date().getMonth() + 1 === seasonInfo.month && new Date().getDate() > seasonInfo.day) ? 1 : 0)}年{seasonInfo.month}月{seasonInfo.day}日
       </div>
     </div>
@@ -115,12 +115,12 @@ interface TimeUnitProps {
 const TimeUnit: React.FC<TimeUnitProps> = ({ value, label, settings }) => (
   <div className="flex flex-col items-center">
     <div 
-      className="text-3xl md:text-5xl font-black mb-1 tabular-nums tracking-tight"
+      className="text-2xl sm:text-xl lg:text-2xl xl:text-3xl font-black mb-1 tabular-nums tracking-tight"
       style={{ textShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
     >
       {formatNumber(value)}
     </div>
-    <div className="text-xs md:text-sm font-medium opacity-70 uppercase tracking-widest">
+    <div className="text-xs font-medium opacity-70 uppercase tracking-widest">
       {label}
     </div>
   </div>

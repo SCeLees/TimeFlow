@@ -45,12 +45,18 @@ export const TARGET_EVENTS: EventTarget[] = [
 export const APP_CONFIG = {
   // 四季倒计时卡片的位置：'first' 表示排在第一个，'last' 表示排在最后一个（默认）
   seasonCardPosition: 'last' as 'first' | 'last',
+  
+  // 是否启用移动端和桌面端不同的背景图片
+  enableDifferentBackgrounds: true,
+  
+  // 移动端背景图片路径（当enableDifferentBackgrounds为true时生效）
+  mobileBgImage: '/img/background1.avif',
 };
 
 export const DEFAULT_SETTINGS: AppSettings = {
   bgType: 'image',
   bgColor: '#3b82f6',
-  bgImage: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&w=2940&q=80', // 默认使用unsplash上的图片
+  bgImage: '/img/background1.jpg', // 使用本地背景图片
   blurLevel: 12,
   overlayOpacity: 20,
   textColor: 'white',

@@ -28,7 +28,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, settings
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-y-0 right-0 w-full md:w-96 bg-white/95 backdrop-blur-xl shadow-2xl z-50 p-6 transform transition-transform duration-300 ease-in-out border-l border-gray-200 overflow-y-auto">
+    <div className="fixed inset-y-0 right-0 w-full sm:w-96 bg-white/95 backdrop-blur-xl shadow-2xl z-50 p-6 transform transition-transform duration-300 ease-in-out border-l border-gray-200 overflow-y-auto">
       <div className="flex justify-between items-center mb-8">
         <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
           <Monitor className="w-6 h-6" /> 
@@ -93,19 +93,28 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, settings
                 
                 {/* Default local images from img folder */}
                 {[
-                  '/img/background1.jpg',
-                  '/img/background2.jpg',
-                  '/img/background3.jpg'
-                ].map((path, idx) => (
+                  { path: '/img/background1.jpg', name: '图片1' },
+                  { path: '/img/background2.jpg', name: '图片2' },
+                  { path: '/img/background3.jpg', name: '图片3' },
+                  { path: '/img/background1.avif', name: '图片4' }
+                ].map((img, idx) => (
                   <button
                     key={`local-${idx}`}
-                    onClick={() => updateSettings({ bgImage: path, bgType: 'image' })}
+                    onClick={() => updateSettings({ bgImage: img.path, bgType: 'image' })}
                     className={`relative aspect-video rounded-lg overflow-hidden border-2 ${
-                      settings.bgImage === path ? 'border-blue-500 ring-2 ring-blue-500 ring-offset-2' : 'border-transparent'
+                      settings.bgImage === img.path ? 'border-blue-500 ring-2 ring-blue-500 ring-offset-2' : 'border-transparent'
                     }`}
                   >
-                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                      <span className="text-xs text-gray-500">默认背景 {idx + 1}</span>
+                    <img 
+                      src={img.path} 
+                      alt={img.name} 
+                      className="w-full h-full object-cover"
+                      onError={({ currentTarget }) => {
+                        currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='12' fill='%23666'%3E图片加载失败%3C/text%3E%3C/svg%3E";
+                      }}
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-1 truncate">
+                      {img.name}
                     </div>
                   </button>
                 ))}
