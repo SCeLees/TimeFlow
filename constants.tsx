@@ -50,13 +50,13 @@ export const APP_CONFIG = {
   enableDifferentBackgrounds: true,
   
   // 移动端背景图片路径（当enableDifferentBackgrounds为true时生效）
-  mobileBgImage: '/img/background1.avif',
+  mobileBgImage: '/background1.avif',
 };
 
 export const DEFAULT_SETTINGS: AppSettings = {
   bgType: 'image',
   bgColor: '#3b82f6',
-  bgImage: '/img/background1.jpg', // 使用本地背景图片
+  bgImage: '/background1.jpg', // 使用本地背景图片
   blurLevel: 12,
   overlayOpacity: 20,
   textColor: 'white',
