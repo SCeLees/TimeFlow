@@ -13,6 +13,9 @@ export interface EventTarget {
   month: number; // 1-12
   day: number;   // 1-31
   icon?: React.ReactNode;
+  type?: 'countdown' | 'countup'; // 新增类型字段，默认为倒计时
+  startYear?: number; // 正计时的开始年份
+  description?: string; // 新增描述字段
 }
 
 export interface AppSettings {

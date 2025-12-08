@@ -50,6 +50,82 @@ const App: React.FC = () => {
     color: settings.textColor
   };
 
+  // 构建事件卡片数组，根据配置插入季节倒计时卡片
+  const renderEventCards = () => {
+    // 如果是 'first'，季节卡片放在最前面
+    if (APP_CONFIG.seasonCardPosition === 'first') {
+      return (
+        <>
+          <SeasonCountdownCard settings={settings} />
+          {TARGET_EVENTS.map(event => (
+            <CountdownCard 
+              key={event.id} 
+              event={event} 
+              settings={settings} 
+            />
+          ))}
+        </>
+      );
+    }
+    
+    // 如果是 'last'，季节卡片放在最后面
+    if (APP_CONFIG.seasonCardPosition === 'last') {
+      return (
+        <>
+          {TARGET_EVENTS.map(event => (
+            <CountdownCard 
+              key={event.id} 
+              event={event} 
+              settings={settings} 
+            />
+          ))}
+          <SeasonCountdownCard settings={settings} />
+        </>
+      );
+    }
+    
+    // 如果是数字，按指定索引位置插入
+    if (typeof APP_CONFIG.seasonCardPosition === 'number') {
+      const index = Math.max(0, Math.min(APP_CONFIG.seasonCardPosition, TARGET_EVENTS.length));
+      const beforeEvents = TARGET_EVENTS.slice(0, index);
+      const afterEvents = TARGET_EVENTS.slice(index);
+      
+      return (
+        <>
+          {beforeEvents.map(event => (
+            <CountdownCard 
+              key={event.id} 
+              event={event} 
+              settings={settings} 
+            />
+          ))}
+          <SeasonCountdownCard settings={settings} />
+          {afterEvents.map(event => (
+            <CountdownCard 
+              key={event.id} 
+              event={event} 
+              settings={settings} 
+            />
+          ))}
+        </>
+      );
+    }
+    
+    // 默认情况，放在最后
+    return (
+      <>
+        {TARGET_EVENTS.map(event => (
+          <CountdownCard 
+            key={event.id} 
+            event={event} 
+            settings={settings} 
+          />
+        ))}
+        <SeasonCountdownCard settings={settings} />
+      </>
+    );
+  };
+
   return (
     <div 
       className="min-h-screen w-full relative transition-all duration-500 ease-in-out overflow-x-hidden"
@@ -91,19 +167,7 @@ const App: React.FC = () => {
             {/* Left side - Countdown Cards */}
             <div className="flex-1">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {APP_CONFIG.seasonCardPosition === 'first' && (
-                  <SeasonCountdownCard settings={settings} />
-                )}
-                {TARGET_EVENTS.map(event => (
-                  <CountdownCard 
-                    key={event.id} 
-                    event={event} 
-                    settings={settings} 
-                  />
-                ))}
-                {APP_CONFIG.seasonCardPosition === 'last' && (
-                  <SeasonCountdownCard settings={settings} />
-                )}
+                {renderEventCards()}
               </div>
             </div>
             

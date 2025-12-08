@@ -1,19 +1,26 @@
 import { TimeLeft } from '../types';
 
-export const calculateTimeLeft = (month: number, day: number): TimeLeft => {
+export const calculateTimeLeft = (month: number, day: number, type: 'countdown' | 'countup' = 'countdown', startYear?: number): TimeLeft => {
   const now = new Date();
-  let year = now.getFullYear();
+  let targetDate: Date;
 
-  // Create target date for this year
-  // Note: Month in Date constructor is 0-indexed (0 = Jan, 11 = Dec)
-  let targetDate = new Date(year, month - 1, day, 0, 0, 0);
+  if (type === 'countup' && startYear) {
+    // 正计时：从指定年份的日期到现在的时长
+    targetDate = new Date(startYear, month - 1, day, 0, 0, 0);
+  } else {
+    // 倒计时：默认行为
+    let year = now.getFullYear();
+    targetDate = new Date(year, month - 1, day, 0, 0, 0);
 
-  // If the date has already passed this year, set it to next year
-  if (now.getTime() > targetDate.getTime()) {
-    targetDate = new Date(year + 1, month - 1, day, 0, 0, 0);
+    // 如果目标日期已过，设置为明年
+    if (now.getTime() > targetDate.getTime()) {
+      targetDate = new Date(year + 1, month - 1, day, 0, 0, 0);
+    }
   }
 
-  const difference = targetDate.getTime() - now.getTime();
+  const difference = type === 'countup' && startYear 
+    ? now.getTime() - targetDate.getTime()  // 正计时：现在减去开始时间
+    : targetDate.getTime() - now.getTime(); // 倒计时：目标时间减去现在
 
   if (difference > 0) {
     return {

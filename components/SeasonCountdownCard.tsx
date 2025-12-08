@@ -12,7 +12,8 @@ const SeasonCountdownCard: React.FC<SeasonCountdownCardProps> = ({ settings }) =
     name: '',
     month: 0,
     day: 0,
-    icon: null as React.ReactNode
+    icon: null as React.ReactNode,
+    description: '' as string
   });
 
   useEffect(() => {
@@ -26,7 +27,8 @@ const SeasonCountdownCard: React.FC<SeasonCountdownCardProps> = ({ settings }) =
         name: '夏季',
         month: 6,
         day: 1,
-        icon: <Sun className="w-6 h-6" />
+        icon: <Sun className="w-6 h-6" />,
+        description: '炎热的夏天即将到来'
       });
     } else if (currentMonth >= 6 && currentMonth <= 8) {
       // 夏季 (6-8月) -> 秋季开始 (9月1日)
@@ -34,7 +36,8 @@ const SeasonCountdownCard: React.FC<SeasonCountdownCardProps> = ({ settings }) =
         name: '秋季',
         month: 9,
         day: 1,
-        icon: <Leaf className="w-6 h-6" />
+        icon: <Leaf className="w-6 h-6" />,
+        description: '凉爽的秋天即将到来'
       });
     } else if (currentMonth >= 9 && currentMonth <= 11) {
       // 秋季 (9-11月) -> 冬季开始 (12月1日)
@@ -42,7 +45,8 @@ const SeasonCountdownCard: React.FC<SeasonCountdownCardProps> = ({ settings }) =
         name: '冬季',
         month: 12,
         day: 1,
-        icon: <Snowflake className="w-6 h-6" />
+        icon: <Snowflake className="w-6 h-6" />,
+        description: '寒冷的冬天即将到来'
       });
     } else {
       // 冬季 (12月-2月) -> 春季开始 (3月1日)
@@ -50,7 +54,8 @@ const SeasonCountdownCard: React.FC<SeasonCountdownCardProps> = ({ settings }) =
         name: '春季',
         month: 3,
         day: 1,
-        icon: <Flower className="w-6 h-6" />
+        icon: <Flower className="w-6 h-6" />,
+        description: '温暖的春天即将到来'
       });
     }
   }, []);
@@ -99,8 +104,15 @@ const SeasonCountdownCard: React.FC<SeasonCountdownCardProps> = ({ settings }) =
         <TimeUnit value={timeLeft.seconds} label="秒" settings={settings} />
       </div>
       
-      <div className="mt-4 text-center text-sm opacity-60 font-medium">
-        目标日期: {new Date().getFullYear() + (new Date().getMonth() + 1 > seasonInfo.month || (new Date().getMonth() + 1 === seasonInfo.month && new Date().getDate() > seasonInfo.day) ? 1 : 0)}年{seasonInfo.month}月{seasonInfo.day}日
+      <div className="mt-4 text-center">
+        {seasonInfo.description && (
+          <div className="text-sm opacity-70 font-medium mb-1">
+            {seasonInfo.description}
+          </div>
+        )}
+        <div className="text-sm opacity-60 font-medium">
+          目标日期: {new Date().getFullYear() + (new Date().getMonth() + 1 > seasonInfo.month || (new Date().getMonth() + 1 === seasonInfo.month && new Date().getDate() > seasonInfo.day) ? 1 : 0)}年{seasonInfo.month}月{seasonInfo.day}日
+        </div>
       </div>
     </div>
   );
@@ -115,7 +127,7 @@ interface TimeUnitProps {
 const TimeUnit: React.FC<TimeUnitProps> = ({ value, label, settings }) => (
   <div className="flex flex-col items-center">
     <div 
-      className="text-2xl sm:text-xl lg:text-2xl xl:text-3xl font-black mb-1 tabular-nums tracking-tight"
+      className="text-2xl sm:text-2xl lg:text-2xl xl:text-3xl font-black mb-1 tabular-nums tracking-tight"
       style={{ textShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
     >
       {formatNumber(value)}
