@@ -1,99 +1,104 @@
-# TimeFlow 倒计时专注应用
+**English** | [**中文简体**](README_CN.md)
 
-TimeFlow 是一个美观实用的倒计时应用，帮助您专注于重要目标和时间节点。应用提供多种倒计时卡片，包括重要节日、考试以及季节变化，并配有实时时间统计功能，让您更好地感知时间流逝。
+---
 
-## 在线演示
+# TimeFlow - Countdown & Focus Application
 
-演示站点：[https://countdown.gts.us.kg/](https://countdown.gts.us.kg/)
+TimeFlow is a beautiful and practical countdown application designed to help you stay focused on important goals and deadlines. The app provides a variety of countdown cards for events like important holidays, exams, and seasonal changes, along with real-time statistics to help you better perceive the passage of time.
 
-## 功能特色
+## Live Demo
 
-### 🎯 多样化倒计时
-- **重要事件倒计时**：内置中考、高考、春节、元旦、国庆节等多个重要事件
-- **季节变化倒计时**：自动计算距离下一个季节的时间
-- **正计时支持**：支持从指定日期开始的正向计时（如站点运行时间）
-- **实时时间统计**：展示今日、本周、本月、本年的进度条和时间分布
+Demo Site: https://countdown.gts.us.kg/
+Note: Mobile experience is not optimal; desktop experience is recommended.
 
-### 🎨 高度可定制化界面
-- **背景设置**：支持纯色背景和图片背景（可上传本地图片或使用默认背景）
-- **视觉效果**：可调节毛玻璃模糊强度和卡片透明度
-- **配色方案**：支持白色和黑色文字主题
-- **响应式设计**：完美适配桌面端和移动端显示
+## Features
 
-### 🧩 灵活的卡片配置
-- **自定义描述信息**：每个倒计时卡片可添加描述信息
-- **灵活布局**：可自定义季节倒计时卡片在列表中的位置
-- **统一视觉风格**：所有卡片采用一致的设计语言和交互动效
+### 🎯 Diverse Countdowns
+- **Important Events**: Pre-configured countdowns for events like Midterm Exams, Gaokao (College Entrance Exam), Spring Festival, New Year's Day, National Day, etc.
+- **Seasonal Transitions**: Automatically calculates the time until the next season.
+- **Count-Up Support**: Supports forward counting from a specific date (e.g., site uptime).
+- **Real-Time Statistics**: Displays progress bars and time distribution for today, this week, this month, and this year.
 
-### ⚡ 实时更新
-- 所有倒计时精确到秒，实时更新
-- 时间统计每分钟自动刷新
+### 🎨 Highly Customizable Interface
+- **Background Settings**: Supports solid colors and image backgrounds (upload local images or use default backgrounds).
+- **Visual Effects**: Adjustable glass morphism blur strength and card transparency.
+- **Color Themes**: Supports both white and black text themes.
+- **Responsive Design**: Optimized for both desktop and mobile displays.
 
-## 快速开始
+### 🧩 Flexible Card Configuration
+- **Custom Descriptions**: Add descriptive information to each countdown card.
+- **Flexible Layout**: Customize the position of the seasonal countdown card within the list.
+- **Consistent Visual Style**: All cards share a unified design language and interactive animations.
 
-### 本地运行
+### ⚡ Real-Time Updates
+- All countdowns are accurate to the second and update in real-time.
+- Time statistics refresh automatically every minute.
 
-1. 克隆项目到本地：
+## Getting Started
+
+### Local Development
+
+1. Clone the repository locally:
 ```bash
 git clone <repository-url>
 cd TimeFlow
 ```
 
-2. 安装依赖：
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-3. 启动开发服务器：
+3. Start the development server:
 ```bash
 npm run dev
 ```
 
-4. 在浏览器中打开 http://localhost:3000 查看应用
+4. Open your browser and navigate to http://localhost:3000
 
-### 构建生产版本
+### Production Build
 
-运行以下命令构建生产版本：
+Run the following command to build for production:
 ```bash
 npm run build
 ```
 
-构建完成后，所有静态文件将生成在 `dist` 目录中。
+After the build completes, all static files will be generated in the `dist` directory.
 
-### 部署
+### Deployment
 
-您可以将 `dist` 目录中的文件部署到任何静态网站托管服务，例如：
+You can deploy the contents of the `dist` directory to any static hosting service, such as:
 - Vercel
 - Netlify
 - GitHub Pages
-- 自有服务器
+- Your own server
 
-## 使用指南
+## User Guide
 
-### 主界面
+### Main Interface
 
-应用主界面包含三个主要区域：
-1. **事件倒计时卡片**：显示各个重要事件的倒计时
-2. **季节倒计时卡片**：显示距离下一个季节的时间
-3. **时间统计卡片**：以进度条形式展示时间流逝情况
+The main interface consists of three main sections:
+1. **Event Countdown Cards**: Display countdowns for various important events.
+2. **Season Countdown Card**: Shows the time remaining until the next season.
+3. **Time Statistics Cards**: Display time progression using progress bars.
 
-### 设置面板
+### Settings Panel
 
-点击右上角的设置按钮可以打开设置面板，您可以在此处：
+Click the settings button in the top-right corner to open the settings panel, where you can:
 
-1. **背景设置**
-   - 选择背景类型（纯色或图片）
-   - 选择预设背景图片或上传本地图片
-   - 设置背景颜色（纯色模式下）
+1. **Background Settings**
+   - Choose background type (Solid Color or Image)
+   - Select preset background pictures or upload a local image
+   - Set background color (Solid Color mode)
 
-2. **外观样式**
-   - 切换文字颜色（白色/黑色）
-   - 调整毛玻璃模糊强度
-   - 控制卡片透明度
+2. **Appearance Styles**
+   - Toggle text color (White/Black)
+   - Adjust glass morphism blur strength
+   - Control card transparency
 
-所有设置会自动保存并在页面刷新后保持。
+All settings are automatically saved and persist after page refresh.
 
-## 技术栈
+## Tech Stack
 
 - React 19
 - TypeScript
@@ -101,64 +106,64 @@ npm run build
 - Tailwind CSS
 - Lucide React Icons
 
-## 浏览器兼容性
+## Browser Compatibility
 
-应用支持所有现代浏览器，包括：
+The application supports all modern browsers, including:
 - Chrome 60+
 - Firefox 55+
 - Safari 12+
 - Edge 79+
 
-## 开发
+## Development
 
-### 项目结构
+### Project Structure
 ```
 TimeFlow/
-├── components/          # React 组件
-├── utils/               # 工具函数
-├── public/              # 默认背景图片
-├── dist/                # 生产构建输出
-├── App.tsx             # 主应用组件
-├── constants.tsx       # 应用常量配置
-├── types.ts            # TypeScript 类型定义
-├── vite.config.ts      # Vite 配置文件
-└── index.html          # HTML 入口文件
+├── components/          # React Components
+├── utils/               # Utility Functions
+├── public/              # Default Background Images
+├── dist/                # Production Build Output
+├── App.tsx             # Main Application Component
+├── constants.tsx       # Application Constants & Configuration
+├── types.ts            # TypeScript Type Definitions
+├── vite.config.ts      # Vite Configuration File
+└── index.html          # HTML Entry File
 ```
 
-### 添加新的倒计时事件
+### Adding New Countdown Events
 
-1. 在 `constants.tsx` 文件的 `TARGET_EVENTS` 数组中添加新的事件对象
-2. 每个事件需要包含以下属性：
-   - `id`: 唯一标识符
-   - `name`: 事件名称
-   - `month`: 月份（1-12）
-   - `day`: 日期（1-31）
-   - `icon`: 显示图标（来自 lucide-react）
-   - `type`: 计时类型（'countdown' 倒计时 或 'countup' 正计时）
-   - `startYear`: 正计时的起始年份（仅正计时需要）
-   - `description`: 描述信息（可选）
+1. Add a new event object to the `TARGET_EVENTS` array in the `constants.tsx` file.
+2. Each event requires the following properties:
+   - `id`: Unique identifier
+   - `name`: Event name
+   - `month`: Month (1-12)
+   - `day`: Day (1-31)
+   - `icon`: Display icon (from lucide-react)
+   - `type`: Timing type ('countdown' for countdown or 'countup' for count-up)
+   - `startYear`: Start year for count-up events (required only for 'countup' type)
+   - `description`: Description text (optional)
 
-### 自定义背景图片
+### Custom Background Images
 
-1. 将背景图片放入 `public` 目录
-2. 在设置面板中选择"默认背景"选项卡即可看到新添加的图片
+1. Place your background image in the `public` directory.
+2. Select the "Default Backgrounds" tab in the settings panel to see the newly added image.
 
-### 移动端与桌面端不同背景
+### Different Backgrounds for Mobile & Desktop
 
-1. 在 `constants.tsx` 中设置 `APP_CONFIG.enableDifferentBackgrounds` 为 `true`
-2. 设置 `APP_CONFIG.mobileBgImage` 为移动端专用背景图片路径
+1. Set `APP_CONFIG.enableDifferentBackgrounds` to `true` in `constants.tsx`.
+2. Set `APP_CONFIG.mobileBgImage` to the path of the mobile-specific background image.
 
-### 自定义季节卡片位置
+### Customizing Season Card Position
 
-在 `constants.tsx` 中设置 `APP_CONFIG.seasonCardPosition`：
-- `'first'`: 放在最前面
-- `'last'`: 放在最后面
-- 数字: 指定具体位置索引（从0开始）
+In `constants.tsx`, set the `APP_CONFIG.seasonCardPosition`:
+- `'first'`: Place at the beginning
+- `'last'`: Place at the end
+- Number: Specify a specific index position (starting from 0)
 
-## 许可证
+## License
 
 MIT License
 
-## 支持
+## Support
 
-如有问题或建议，请提交 issue 或联系开发者。
+For issues or suggestions, please submit an issue or contact the developer.
