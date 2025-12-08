@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Image as ImageIcon, Palette, Monitor, Type, Save, RotateCcw } from 'lucide-react';
+import { X, Image as ImageIcon, Palette, Monitor, Type } from 'lucide-react';
 import { AppSettings } from '../types';
 
 interface SettingsPanelProps {
@@ -7,17 +7,13 @@ interface SettingsPanelProps {
   onClose: () => void;
   settings: AppSettings;
   updateSettings: (newSettings: Partial<AppSettings>) => void;
-  saveCurrentSettingsAsCustom: () => void;
-  clearCustomSettings: () => void;
 }
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ 
   isOpen, 
   onClose, 
   settings, 
-  updateSettings,
-  saveCurrentSettingsAsCustom,
-  clearCustomSettings
+  updateSettings
 }) => {
   
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -214,28 +210,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
               className="w-full accent-blue-600 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
             />
           </div>
-        </section>
-
-        {/* Style Memory */}
-        <section className="space-y-4">
-          <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">样式记忆</h3>
-          <div className="flex gap-3">
-            <button
-              onClick={saveCurrentSettingsAsCustom}
-              className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl border-2 border-green-500 bg-green-50 text-green-700 font-medium transition-all hover:bg-green-100"
-            >
-              <Save className="w-4 h-4" /> 记忆当前样式
-            </button>
-            <button
-              onClick={clearCustomSettings}
-              className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl border-2 border-red-500 bg-red-50 text-red-700 font-medium transition-all hover:bg-red-100"
-            >
-              <RotateCcw className="w-4 h-4" /> 取消记忆样式
-            </button>
-          </div>
-          <p className="text-xs text-gray-500">
-            记忆当前样式后，刷新浏览器仍将保持当前样式。取消记忆样式将恢复到默认主题设置。
-          </p>
         </section>
       </div>
     </div>
